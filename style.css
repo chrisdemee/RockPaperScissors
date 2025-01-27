@@ -4,3 +4,40 @@ h1 {
     font-style: normal;
     font-size: 70px;  
 }
+
+button {
+    font-family: 'Arial', sans-serif; 
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  button.rock { 
+    background-color: #d9534f; 
+    color: white;
+  }
+  button.rock:hover {
+    background-color: #c9302c; 
+    transform: scale(1.05);
+  }
+  button.paper {
+    background-color: #5bc0de; 
+    color: white;
+  }
+  button.paper:hover {
+    background-color: #31b0d5; 
+    transform: scale(1.05);
+  }
+  button.scissors {
+    background-color: #f9c946; 
+    color: white;
+  }
+  
+  button.scissors:hover {
+    background-color: #f0b63f; 
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
