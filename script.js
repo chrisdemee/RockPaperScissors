@@ -73,11 +73,31 @@ const playGame = (userChoice) => {
     // Create the image for the user choice
     if (userChoice === "rock") {
         const img = document.createElement("img");
-        img.src = "rock.png"; 
+        img.src = "imgs/rock.png"; 
         img.alt = "Rock";
         img.style.width = "100px"; 
         img.style.height = "100px"; 
         img.style.marginTop = "20px"; 
         imageContainer.appendChild(img);
     }
+
+    if (userChoice === "paper") {
+      const img = document.createElement("img");
+      img.src = "imgs/hands.png"; 
+      img.alt = "Paper";
+      img.style.width = "100px"; 
+      img.style.height = "100px"; 
+      img.style.marginTop = "20px"; 
+      imageContainer.appendChild(img);
+  }
+
+  if (userChoice === "scissors") {
+    const img = document.createElement("img");
+    img.src = "imgs/scissors.png"; 
+    img.alt = "Scissors";
+    img.style.width = "100px"; 
+    img.style.height = "100px"; 
+    img.style.marginTop = "20px"; 
+    imageContainer.appendChild(img);
+}
 };
