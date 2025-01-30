@@ -25,7 +25,7 @@ const getComputerChoice = () => {
   return choices[Math.floor(Math.random() * 3)];
 };
 
-// Function to determine the winner of a round
+// function to determine the winner of one round
 const determineWinner = (userChoice, computerChoice) => {
   if (userChoice === computerChoice) return "It's a tie!";
   if (
