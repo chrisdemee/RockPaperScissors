@@ -12,92 +12,134 @@ window.onload = () => {
   }
 };
 
+// Variables to track scores and rounds
+let userScore = 0;
+let computerScore = 0;
+let round = 1;
+const maxRounds = 5;
+const winningScore = 3;
+
 // Function to get the computer's choice
 const getComputerChoice = () => {
-  const randomNumber = Math.floor(Math.random() * 3);
-  switch (randomNumber) {
-    case 0:
-      return 'rock';
-    case 1:
-      return 'paper';
-    case 2:
-      return 'scissors';
+  const choices = ["rock", "paper", "scissors"];
+  return choices[Math.floor(Math.random() * 3)];
+};
+
+// Function to determine the winner of a round
+const determineWinner = (userChoice, computerChoice) => {
+  if (userChoice === computerChoice) return "It's a tie!";
+  if (
+    (userChoice === "rock" && computerChoice === "scissors") ||
+    (userChoice === "paper" && computerChoice === "rock") ||
+    (userChoice === "scissors" && computerChoice === "paper")
+  ) {
+    userScore++;
+    return "You win this round!";
+  } else {
+    computerScore++;
+    return "You lose this round!";
   }
 };
 
-// Function to determine the winner
-const determineWinner = (userChoice, computerChoice) => {
-  if (userChoice === computerChoice) {
-      return 'The game is a tie!';
-  }
-  if (userChoice === 'rock') {
-      if (computerChoice === 'paper') {
-        return 'Computer won.';
-        } else {
-          return 'You won!';
-        }
+// Function to display the chosen image
+const displayChoiceImage = (choice, containerId) => {
+  const imageContainer = document.getElementById(containerId);
+  imageContainer.innerHTML = ""; // Clear previous images
+
+  const img = document.createElement("img");
+  img.style.width = "100px";
+  img.style.height = "100px";
+  img.style.marginTop = "20px";
+
+  switch (choice) {
+    case "rock":
+      img.src = "imgs/rock.png";
+      img.alt = "Rock";
+      break;
+    case "paper":
+      img.src = "imgs/hands.png";
+      img.alt = "Paper";
+      break;
+    case "scissors":
+      img.src = "imgs/scissors.png";
+      img.alt = "Scissors";
+      break;
   }
 
-  if (userChoice === 'paper') {
-      if (computerChoice === 'scissors') {
-          return 'Computer won.';
-      } else {
-          return 'You won!';
-      }
-  }
+  imageContainer.appendChild(img);
+};
 
-  if (userChoice === 'scissors') {
-      if (computerChoice === 'rock') {
-          return 'Computer won.';
-      } else {
-          return 'You won!';
-      }
+// Function to update the score display
+const updateScoreDisplay = () => {
+  let scoreBoard = document.getElementById("scoreboard");
+  if (!scoreBoard) {
+    scoreBoard = document.createElement("p");
+    scoreBoard.id = "scoreboard";
+    scoreBoard.style.fontSize = "1.2rem";
+    scoreBoard.style.fontWeight = "bold";
+    document.querySelector(".text-center").appendChild(scoreBoard);
   }
+  scoreBoard.innerText = `Round: ${round} | Your Score: ${userScore} | Computer Score: ${computerScore}`;
+};
 
-  if (userChoice === 'bomb') {
-      return 'You won!';
+// Function to display the round result message
+const displayRoundMessage = (message) => {
+  let roundMessage = document.getElementById("round-message");
+  if (!roundMessage) {
+    roundMessage = document.createElement("p");
+    roundMessage.id = "round-message";
+    roundMessage.style.fontSize = "1.3rem";
+    roundMessage.style.fontWeight = "bold";
+    document.querySelector(".text-center").appendChild(roundMessage);
   }
+  roundMessage.innerText = message;
+};
+
+// Function to check if the game is over
+const checkGameOver = () => {
+  if (userScore === winningScore) {
+    alert("🎉 Congratulations! You won the game!");
+    resetGame();
+  } else if (computerScore === winningScore) {
+    alert("😞 The computer won the game. Better luck next time!");
+    resetGame();
+  }
+};
+
+// Function to reset the game
+const resetGame = () => {
+  userScore = 0;
+  computerScore = 0;
+  round = 1;
+  updateScoreDisplay();
+  displayRoundMessage("New game started! Make your move.");
+  document.getElementById("user-choice-image").innerHTML = "";
+  document.getElementById("computer-choice-image").innerHTML = "";
 };
 
 // Function to play the game
 const playGame = (userChoice) => {
-    const computerChoice = getComputerChoice();
-    console.log(`You chose: ${userChoice}.`);
-    console.log(`Computer chose: ${computerChoice}.`);
-    console.log(determineWinner(userChoice, computerChoice));
-
-    // Clear any previous images
-    const imageContainer = document.getElementById("user-choice-image");
-    imageContainer.innerHTML = '';
-
-    // Create the image for the user choice
-    if (userChoice === "rock") {
-        const img = document.createElement("img");
-        img.src = "imgs/rock.png"; 
-        img.alt = "Rock";
-        img.style.width = "100px"; 
-        img.style.height = "100px"; 
-        img.style.marginTop = "20px"; 
-        imageContainer.appendChild(img);
-    }
-
-    if (userChoice === "paper") {
-      const img = document.createElement("img");
-      img.src = "imgs/hands.png"; 
-      img.alt = "Paper";
-      img.style.width = "100px"; 
-      img.style.height = "100px"; 
-      img.style.marginTop = "20px"; 
-      imageContainer.appendChild(img);
+  if (userScore === winningScore || computerScore === winningScore) {
+    return; // Stop game if already won
   }
 
-  if (userChoice === "scissors") {
-    const img = document.createElement("img");
-    img.src = "imgs/scissors.png"; 
-    img.alt = "Scissors";
-    img.style.width = "100px"; 
-    img.style.height = "100px"; 
-    img.style.marginTop = "20px"; 
-    imageContainer.appendChild(img);
-}
+  const computerChoice = getComputerChoice();
+  console.log(`You chose: ${userChoice}`);
+  console.log(`Computer chose: ${computerChoice}`);
+
+  // Display images for both choices
+  displayChoiceImage(userChoice, "user-choice-image");
+  displayChoiceImage(computerChoice, "computer-choice-image");
+
+  // Determine the round winner
+  const resultMessage = determineWinner(userChoice, computerChoice);
+  displayRoundMessage(resultMessage);
+  updateScoreDisplay();
+
+  round++;
+
+  // Check if the game has a winner
+  if (userScore === winningScore || computerScore === winningScore) {
+    checkGameOver();
+  }
 };
