@@ -101,7 +101,7 @@ const checkGameOver = () => {
     alert("🎉 Congratulations! You won the game!");
     resetGame();
   } else if (computerScore === winningScore) {
-    alert("😞 The computer won the game. Better luck next time!");
+    alert("😞 The computer won the game. You might win next time, only one way to find out.");
     resetGame();
   }
 };

@@ -44,3 +44,29 @@ button {
   body {
     background-color:red;
   }
+
+ /* Ensuring both image containers are aligned evenly */
+.d-flex.justify-content-between {
+  display: flex;
+  justify-content: space-evenly; /* Ensures the images are evenly spaced */
+  align-items: center; /* Ensures they are aligned on the same level */
+  margin-top: 20px; /* Optional space between the button section and images */
+}
+
+/* Image containers for user and computer choices */
+#user-choice-image,
+#computer-choice-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px; /* Container width */
+  height: 150px; /* Container height */
+}
+
+/* Ensuring the images themselves are properly sized */
+#user-choice-image img,
+#computer-choice-image img {
+  width: 120px; /* Adjust the image width */
+  height: 120px; /* Adjust the image height */
+  object-fit: contain; /* Ensures the images maintain aspect ratio */
+}
