@@ -1,31 +1,31 @@
-// Ask for the user's name when the page loads
+// user enters name here
 window.onload = () => {
   const userName = prompt("Welcome! What is your name?");
   if (userName) {
-    // Display a greeting message with the user's name
+    // users gets a greeting from the computer 
     const container = document.querySelector(".text-center");
     const greeting = document.createElement("p");
-    greeting.innerText = `Hello, ${userName}! Let's play Rock, Paper, Scissors.`;
+    greeting.innerText = `What's up, ${userName}! Time to play Rock, Paper, Scissors.`;
     greeting.style.fontSize = "1.5rem";
     greeting.style.fontWeight = "bold";
     container.prepend(greeting);
   }
 };
 
-// Variables to track scores and rounds
+// variables
 let userScore = 0;
 let computerScore = 0;
 let round = 1;
 const maxRounds = 5;
 const winningScore = 3;
 
-// Function to get the computer's choice
+// makes the computer randomly choose 
 const getComputerChoice = () => {
   const choices = ["rock", "paper", "scissors"];
   return choices[Math.floor(Math.random() * 3)];
 };
 
-// function to determine the winner of one round
+// function determines the winner of one round
 const determineWinner = (userChoice, computerChoice) => {
   if (userChoice === computerChoice) return "It's a tie!";
   if (
@@ -41,7 +41,7 @@ const determineWinner = (userChoice, computerChoice) => {
   }
 };
 
-// Function to display the chosen image
+// Function makes the image show up
 const displayChoiceImage = (choice, containerId) => {
   const imageContainer = document.getElementById(containerId);
   imageContainer.innerHTML = ""; // Clear previous images
@@ -69,7 +69,7 @@ const displayChoiceImage = (choice, containerId) => {
   imageContainer.appendChild(img);
 };
 
-// Function to update the score display
+// score updates 
 const updateScoreDisplay = () => {
   let scoreBoard = document.getElementById("scoreboard");
   if (!scoreBoard) {
@@ -82,7 +82,7 @@ const updateScoreDisplay = () => {
   scoreBoard.innerText = `Round: ${round} | Your Score: ${userScore} | Computer Score: ${computerScore}`;
 };
 
-// Function to display the round result message
+// dsiplays an image for the result
 const displayRoundMessage = (message) => {
   let roundMessage = document.getElementById("round-message");
   if (!roundMessage) {
@@ -95,7 +95,7 @@ const displayRoundMessage = (message) => {
   roundMessage.innerText = message;
 };
 
-// Function to check if the game is over
+// function if winner wins or loses 
 const checkGameOver = () => {
   if (userScore === winningScore) {
     alert("🎉 Congratulations! You won the game!");
@@ -117,28 +117,28 @@ const resetGame = () => {
   document.getElementById("computer-choice-image").innerHTML = "";
 };
 
-// Function to play the game
+// function plays 
 const playGame = (userChoice) => {
   if (userScore === winningScore || computerScore === winningScore) {
-    return; // Stop game if already won
+    return; 
   }
 
   const computerChoice = getComputerChoice();
   console.log(`You chose: ${userChoice}`);
   console.log(`Computer chose: ${computerChoice}`);
 
-  // Display images for both choices
+  // shows images for both choices
   displayChoiceImage(userChoice, "user-choice-image");
   displayChoiceImage(computerChoice, "computer-choice-image");
 
-  // Determine the round winner
+  // Determine winner of a round
   const resultMessage = determineWinner(userChoice, computerChoice);
   displayRoundMessage(resultMessage);
   updateScoreDisplay();
 
   round++;
 
-  // Check if the game has a winner
+  // checks if there's a winner yet 
   if (userScore === winningScore || computerScore === winningScore) {
     checkGameOver();
   }

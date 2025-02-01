@@ -4,6 +4,18 @@ h1 {
     font-style: normal;
     font-size: 70px;  
 }
+h2 {
+  font-family: "kade", sans-serif;
+font-weight: 900;
+font-style: normal;
+font-size: 23px;
+}
+p {
+  font-family: "kade", sans-serif;
+font-weight: 900;
+font-style: normal;
+font-size: 30px;
+}
 
 button {
     font-family: 'Arial', sans-serif; 
@@ -42,20 +54,18 @@ button {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
   body {
-    background-color:red;
+    background-color:rgb(56, 148, 136);
   }
 
-/* Ensuring both image containers are aligned evenly */
 .choice-container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 150px;
   height: 150px;
-  margin: 0 20px; /* Adds spacing between images */
+  margin: 0 20px; 
 }
 
-/* Ensuring the images themselves are properly sized */
 .choice-container img {
   width: 120px;
   height: 120px;
